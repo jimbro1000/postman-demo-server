@@ -32,9 +32,11 @@ public class BoardApiController implements BoardApi {
   }
 
   public ResponseEntity<List<Board>> boardGet() {
+    log.info("board get all request received");
     String accept = request.getHeader("Accept");
     if (accept != null && accept.contains("application/json")) {
       try {
+        log.info("attempting response to get request");
         return new ResponseEntity<List<Board>>(
             objectMapper.readValue(
                 "[ {\n  \"boardId\" : 0,\n  \"boardOwner\" : \"boardOwner\",\n  \"boardName\" : \"boardName\"\n}, {\n  \"boardId\" : 0,\n  \"boardOwner\" : \"boardOwner\",\n  \"boardName\" : \"boardName\"\n} ]",
@@ -91,6 +93,7 @@ public class BoardApiController implements BoardApi {
           required = true,
           schema = @Schema())
       @PathVariable("boardId") Integer boardId) {
+    log.info("board get by id request received");
     String accept = request.getHeader("Accept");
     if (accept != null && accept.contains("application/json")) {
       try {
